@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZUMOLAR</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:"Cairo",sans-serif;background:#fff;color:#171717}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit}
+
+header{
+    position:sticky;top:0;z-index:1000;min-height:80px;
+    padding:10px 5%;display:flex;align-items:center;
+    justify-content:space-between;background:#fff;
+    box-shadow:0 4px 25px rgba(0,0,0,.07)
+}
+.header-logo{width:150px;height:60px;object-fit:contain}
+nav{display:flex;gap:25px;align-items:center}
+nav a{font-size:15px;font-weight:800}
+.cart-button{
+    border:0;background:#171717;color:#fff;padding:11px 20px;
+    border-radius:30px;font-weight:800;cursor:pointer
+}
+
+/* HERO */
+#home{
+    min-height:700px;padding:70px 20px;display:flex;
+    flex-direction:column;justify-content:center;align-items:center;
+    text-align:center;background:#f5f3ef
+}
+.hero-small{font-size:16px;font-weight:700;margin-bottom:10px}
+.hero-logo{width:700px;max-width:95vw;margin-bottom:10px}
+.hero-logo img{width:100%;max-height:380px;object-fit:contain}
+.hero-title{font-size:46px;font-weight:800;margin-bottom:12px}
+.hero-text{
+    max-width:700px;color:#555;font-size:17px;
+    line-height:2;margin-bottom:28px
+}
+.home-button{
+    background:#171717;color:#fff;padding:14px 34px;
+    border-radius:35px;font-weight:800
+}
+
+/* GENERAL */
+.section-heading{text-align:center;margin-bottom:45px}
+.section-heading h2{font-size:38px;font-weight:800;margin-bottom:8px}
+.section-heading p{color:#777}
+
+/* COLLECTIONS */
+#collections{padding:100px 5%}
+.collections-grid{
+    max-width:1050px;margin:auto;display:grid;
+    grid-template-columns:repeat(2,1fr);gap:30px
+}
+.collection-card{
+    min-height:350px;border-radius:30px;display:flex;
+    flex-direction:column;align-items:center;justify-content:center;
+    overflow:hidden;box-shadow:0 12px 35px rgba(0,0,0,.08);
+    transition:.4s
+}
+.collection-card:hover{transform:translateY(-8px)}
+.collection-card h3{margin-top:18px;font-size:25px;font-weight:800}
+.zumolar-card{background:#f5f3ef}
+.zumolar-card img{width:300px;height:190px;object-fit:contain}
+.ksa-card{background:#006c35;color:#fff}
+.ksa-card img{width:270px;height:190px;object-fit:contain}
+
+/* PRODUCTS */
+.products-section{padding:100px 5%}
+#zumolar{background:#f5f3ef}
+#ksa{background:#006c35;color:#fff}
+#ksa .section-heading h2{color:#fff}
+#ksa .section-heading p{color:rgba(255,255,255,.9)}
+
+.section-logo{
+    display:block;width:300px;height:180px;max-width:80vw;
+    margin:0 auto 12px;object-fit:contain
+}
+.saudi-section-logo{
+    display:block;width:220px;height:180px;max-width:80vw;
+    margin:0 auto 15px;object-fit:contain
+}
+.products{
+    max-width:1200px;margin:auto;display:grid;
+    grid-template-columns:repeat(2,1fr);gap:35px
+}
+.product{
+    background:#fff;color:#171717;border-radius:28px;
+    overflow:hidden;box-shadow:0 12px 35px rgba(0,0,0,.09);
+    transition:.4s
+}
+.product:hover{transform:translateY(-7px)}
+.product-image-box{
+    background:#f7f7f7;overflow:hidden;position:relative
+}
+.product-image{
+    width:100%;height:440px;display:block;
+    object-fit:cover;transition:.5s
+}
+.product:hover .product-image{transform:scale(1.025)}
+.product-info{padding:28px;text-align:center}
+.product-info h3{font-size:27px;font-weight:800;margin-bottom:10px}
+
+/* SOLD OUT فوق الصورة */
+.sold-out-top{
+    position:absolute;
+    top:15px;
+    right:15px;
+    z-index:10;
+    background:#d90000;
+    color:#fff;
+    padding:8px 18px;
+    border-radius:22px;
+    font-size:14px;
+    font-weight:800;
+    box-shadow:0 4px 12px rgba(0,0,0,.25)
+}
+
+/* DESCRIPTION */
+.description-title{
+    color:#171717;font-size:19px;font-weight:800;margin:20px 0 8px
+}
+.description{
+    padding:22px;background:#fafafa;border-radius:18px;
+    text-align:right;line-height:2.1;font-size:14px;color:#444
+}
+
+/* PRICE */
+.price{
+    margin:18px 0;display:flex;justify-content:center;
+    align-items:center;gap:10px;font-size:23px;font-weight:800
+}
+.old-price{color:#999;text-decoration:line-through;font-size:17px}
+.new-price{color:#006c35}
+.riyal-icon{
+    width:19px;height:19px;object-fit:contain;vertical-align:middle
+}
+
+/* SIZES */
+.sizes{
+    display:flex;justify-content:center;flex-wrap:wrap;
+    gap:8px;margin:18px 0
+}
+.size{
+    min-width:45px;padding:8px 11px;border:1px solid #ddd;
+    background:#fff;color:#171717;border-radius:9px;
+    cursor:pointer;font-weight:700
+}
+.size.selected{background:#171717;color:#fff;border-color:#171717}
+
+/* BUTTON */
+.add-button{
+    width:100%;max-width:250px;border:0;background:#171717;
+    color:#fff;padding:13px 25px;border-radius:30px;
+    cursor:pointer;font-weight:800
+}
+.add-button:disabled{background:#999;cursor:not-allowed}
+
+/* CONTACT */
+.contact-section{
+    padding:100px 20px;background:#f5f3ef;text-align:center
+}
+.contact-section h2{font-size:38px;font-weight:800;margin-bottom:15px}
+.contact-section p{
+    max-width:650px;margin:0 auto 25px;
+    line-height:2;font-size:18px;color:#555
+}
+.contact-buttons{
+    display:flex;flex-direction:column;
+    align-items:center;gap:12px
+}
+.contact-button{
+    display:block;width:260px;padding:13px 28px;
+    border-radius:30px;color:#fff;font-size:17px;font-weight:800;
+    text-align:center
+}
+.phone-button{background:#171717}
+.whatsapp-button{background:#25D366}
+
+/* CART */
+.cart-box{
+    display:none;position:fixed;top:95px;left:20px;width:370px;
+    max-width:calc(100% - 40px);background:#fff;color:#171717;
+    padding:25px;border-radius:25px;
+    box-shadow:0 15px 50px rgba(0,0,0,.25);z-index:2000
+}
+.cart-box.show{display:block}
+.cart-box h2{margin-bottom:20px}
+.cart-item{padding:14px 0;border-bottom:1px solid #eee}
+.remove-button{
+    margin-top:8px;border:0;background:#d90000;color:#fff;
+    padding:5px 11px;border-radius:10px;cursor:pointer
+}
+.close-cart{
+    border:0;background:#171717;color:#fff;
+    padding:10px 18px;border-radius:20px;cursor:pointer
+}
+
+/* FOOTER */
+footer{
+    padding:60px 20px;background:#171717;color:#fff;text-align:center
+}
+footer h2{font-size:32px;margin-bottom:8px}
+footer p{opacity:.8;margin:5px}
+
+/* MOBILE */
+@media(max-width:900px){
+    header{
+        padding:12px 20px;flex-wrap:wrap;
+        justify-content:center;gap:10px
+    }
+    nav{
+        width:100%;order:3;justify-content:center;
+        gap:15px;flex-wrap:wrap
+    }
+    .products{grid-template-columns:1fr;max-width:650px}
+    .collections-grid{grid-template-columns:1fr;max-width:600px}
+}
+
+@media(max-width:600px){
+    #home{min-height:680px}
+    .hero-title{font-size:34px}
+    .hero-logo{width:95vw}
+    .hero-logo img{max-height:270px}
+    .section-heading h2{font-size:30px}
+    .products-section{padding:70px 15px}
+    .product-image{height:330px}
+    .product-info{padding:22px 17px}
+    .collection-card{min-height:290px}
+    .contact-section h2{font-size:30px}
+    .contact-section p{font-size:16px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+
+    <a href="#home">
+        <img src="logo.png" alt="ZUMOLAR" class="header-logo">
+    </a>
+
+    <nav>
+        <a href="#home">الرئيسية</a>
+        <a href="#collections">المجموعات</a>
+        <a href="#zumolar">ZUMOLAR</a>
+        <a href="#ksa">السعودية</a>
+        <a href="#contact">تواصل معنا</a>
+    </nav>
+
+    <button class="cart-button" onclick="toggleCart()">
+        🛒 السلة (<span id="cartCount">0</span>)
+    </button>
+
+</header>
+
+
+<!-- HERO -->
+<section id="home">
+
+    <div class="hero-small">هلا والله 👋 نورت ZUMOLAR</div>
+
+    <div class="hero-logo">
+        <img src="logo.png" alt="شعار ZUMOLAR">
+    </div>
+
+    <h1 class="hero-title">
+        لأن ستايلك يستاهل يكون مختلف
+    </h1>
+
+    <p class="hero-text">
+        تصاميم مختلفة، تفاصيل لها معنى،
+        وستايل ما يحتاج شرح.
+    </p>
+
+    <a href="#collections" class="home-button">
+        شوف التشكيلة
+    </a>
+
+</section>
+
+
+<!-- COLLECTIONS -->
+<section id="collections">
+
+    <div class="section-heading">
+        <h2>خذ لك لفة بين تصاميمنا 👀</h2>
+        <p>اختار مجموعتك وخلك على جوّك.</p>
+    </div>
+
+    <div class="collections-grid">
+
+        <a href="#zumolar" class="collection-card zumolar-card">
+            <img src="zumolar-collection.png" alt="مجموعة ZUMOLAR">
+            <h3>مجموعة ZUMOLAR</h3>
+        </a>
+
+        <a href="#ksa" class="collection-card ksa-card">
+            <img src="saudi-logo.png" alt="شعار المملكة العربية السعودية">
+            <h3>المجموعة السعودية 🇸🇦</h3>
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ZUMOLAR -->
+<section id="zumolar" class="products-section">
+
+    <div class="section-heading">
+
+        <img src="zumolar-collection.png" alt="ZUMOLAR" class="section-logo">
+
+        <h2>مجموعة ZUMOLAR</h2>
+
+        <p>تصاميم مختلفة، لناس تحب تكون مختلفة.</p>
+
+    </div>
+
+    <div class="products">
+
+
+        <!-- SPIDER MAN -->
+        <div class="product">
+
+            <div class="product-image-box">
+                <img src="spiderman.png" alt="Spider-Man" class="product-image">
+            </div>
+
+            <div class="product-info">
+
+                <h3>سبايدر مان | Spider-Man</h3>
+
+                <h4 class="description-title">وصف التشيرت</h4>
+
+                <div class="description">
+
+                    اختار المصمم في هذا التصميم أن يكون شعار Spider-Man في منتصف الصدر، ليكون العنصر الأساسي الذي يعكس هوية الشخصية وقوتها.
+
+                    <br><br>
+
+                    وفي الجهة اليمنى، أضاف المصمم صورة لـ Spider-Man، بينما اختار في الجهة اليسرى وضع عيون Spider-Man الشهيرة، ليجمع التصميم بين أبرز رموز الشخصية بأسلوب عصري ومميز.
+
+                    <br><br>
+
+                    كما أضاف المصمم أسفل شعار Spider-Man رأس Spider-Man يخرج من الجهة اليسرى، ليمنح التصميم لمسة حركية وجذابة. وفي الخلف، وضع ثلاثة من شعارات Spider-Man بتنسيق مميز.
+
+                    <br><br>
+
+                    وفي الجزء العلوي من التصميم، يتواجد شعار MARVEL، إلى جانب شعار زومولار التاريخي، لتكتمل تفاصيل التصميم بروح مستوحاة من عالم الأبطال الخارقين.
+
+                </div>
+
+                <div class="price">
+                    <span class="old-price">
+                        150
+                        <img src="riyalsymbol.png" class="riyal-icon" alt="ريال">
+                    </span>
+
+                    <span class="new-price">
+                        100
+                        <img src="riyalsymbol.png" class="riyal-icon" alt="ريال">
+                    </span>
+                </div>
+
+                <div class="sizes">
+                    <button class="size">S</button>
+                    <button class="size">M</button>
+                    <button class="size">L</button>
+                    <button class="size">XL</button>
+                    <button class="size">XXL</button>
+                    <button class="size">XXXL</button>
+                </div>
+
+                <button class="add-button"
+                    onclick="addToCart('سبايدر مان | Spider-Man',100)">
+                    أضف للسلة 🛒
+                </button>
+
+            </div>
+        </div>
+
+
+        <!-- BATMAN -->
+        <div class="product">
+
+            <div class="product-image-box">
+                <img src="batman.png" alt="Batman" class="product-image">
+            </div>
+
+            <div class="product-info">
+
+                <h3>باتمان | Batman</h3>
+
+                <h4 class="description-title">وصف التشيرت</h4>
+
+                <div class="description">
+
+                    اختار المصمم في هذا التصميم الخاص بتيشرت BATMAN أن يكون شعار باتمان في منتصف الصدر، ليكون العنصر الأساسي الذي يعبر عن هوية فارس الظلام.
+
+                    <br><br>
+
+                    وفي الجهة اليمنى، أضاف المصمم صورة لباتمان، بينما وضع في الجهة اليسرى صورة للجوكر، أشهر خصومه، ليعكس التصميم الصراع الأسطوري بين الخير والشر في عالم باتمان.
+
+                    <br><br>
+
+                    أما في الخلف، فتظهر مكونات سيارة باتمان الأسطورية (Batmobile) بتفاصيل مستوحاة من التصميم الهندسي، لتمنح التيشرت طابعًا فريدًا لمحبي عالم BATMAN.
+
+                    <br><br>
+
+                    كما تمت إضافة شعار DC وشعار زومولار التاريخي كلمسات مكملة للتصميم، لتكتمل هوية التيشرت المستوحاة من عالم باتمان.
+
+                </div>
+
+                <div class="price">
+                    <span class="old-price">
+                        150
+                        <img src="riyalsymbol.png" class="riyal-icon" alt="ريال">
+                    </span>
+
+                    <span class="new-price">
+                        100
+                        <img src="riyalsymbol.png" class="riyal-icon" alt="ريال">
+                    </span>
+                </div>
+
+                <div class="sizes">
+                    <button class="size">S</button>
+                    <button class="size">M</button>
+                    <button class="size">L</button>
+                    <button class="size">XL</button>
+                    <button class="size">XXL</button>
+                    <button class="size">XXXL</button>
+                </div>
+
+                <button class="add-button"
+                    onclick="addToCart('باتمان | Batman',100)">
+                    أضف للسلة 🛒
+                </button>
+
+            </div>
+        </div>
+
+
+        <!-- CAPTAIN AMERICA -->
+        <div class="product">
+
+            <div class="product-image-box">
+
+                <!-- فوق صورة التشيرت -->
+                <div class="sold-out-top">
+                    نفذت الكمية
+                </div>
+
+                <img
+                    src="captain-america.png"
+                    alt="Captain America"
+                    class="product-image"
+                >
+
+            </div>
+
+            <div class="product-info">
+
+                <h3>كابتن أمريكا | Captain America</h3>
+
+                <h4 class="description-title">وصف التشيرت</h4>
+
+                <div class="description">
+
+                    اختار المصمم في هذا التصميم أن يكون درع Captain America في منتصف الصدر، ليكون العنصر الأساسي الذي يعكس هوية الشخصية وقوتها وشجاعتها.
+
+                    <br><br>
+
+                    وفي الجهة اليمنى، أضاف المصمم صورة Captain America، بينما اختار في الجهة اليسرى وضع تفاصيل مستوحاة من الدرع الشهير، ليجمع التصميم بين أبرز رموز الشخصية بأسلوب عصري ومميز.
+
+                    <br><br>
+
+                    أما في الخلف، فتظهر تفاصيل مستوحاة من عالم Captain America، لتمنح التيشرت طابعًا مميزًا لمحبي الشخصية والأبطال الخارقين.
+
+                    <br><br>
+
+                    كما أضيفت لمسات مكملة مثل شعار MARVEL وشعار زومولار التاريخي، لتكتمل هوية التصميم بروح مستوحاة من عالم الأبطال الخارقين.
+
+                </div>
+
+                <div class="price">
+                    <span class="old-price">
+                        150
+                        <img src="riyalsymbol.png" class="riyal-icon" alt="ريال">
+                    </span>
+
+                    <span class="new-price">
+                        100
+                        <img src="riyalsymbol.png" class="riyal-icon" alt="ريال">
+                    </span>
+                </div>
+
+                <div class="sizes">
+                    <button class="size">S</button>
+                    <button class="size">M</button>
+                    <button class="size">L</button>
+                    <button class="size">XL</button>
+                    <button class="size">XXL</button>
+                    <button class="size">XXXL</button>
+                </div>
+
+                <button class="add-button" disabled>
+                    نفذت الكمية
+                </button>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- SAUDI -->
+<section id="ksa" class="products-section">
+
+    <div class="section-heading">
+
+        <img src="saudi-logo.png"
+             alt="شعار المملكة العربية السعودية"
+             class="saudi-section-logo">
+
+        <h2>المجموعة السعودية 🇸🇦</h2>
+
+        <p>تصاميم مستوحاة من هوية المملكة.</p>
+
+    </div>
+
+    <div class="products">
+
+
+        <!-- KSA 1 -->
+        <div class="product">
+
+            <div class="product-image-box">
+                <img src="KSA1.png" alt="السيف" class="product-image">
+            </div>
+
+            <div class="product-info">
+
+                <h3>السيف | The Sword</h3>
+
+                <h4 class="description-title">وصف التشيرت</h4>
+
+                <div class="description">
+
+                    في تصميم تيشرت اليوم الوطني السعودي الـ96، اختار المصمم أن يتربّع سيف العلم السعودي في أعلى الصدر، ليكون رمزًا بارزًا للقوة.
+
+                    <br><br>
+
+                    كما أضاف اسم المدينة التي ينتمي إليها العميل في يمناه، ومفتاح المملكة +966 في الجهة اليسرى.
+
+                    <br><br>
+
+                    وأُضيفت لمسات من اسم المملكة العربية السعودية باللغة الإنجليزية: “Kingdom of Saudi Arabia”، حيث تكرر الاسم عشر مرات ليمنح التصميم طابعًا مميزًا.
+
+                    <br><br>
+
+                    كما يحتوي التصميم على تفاصيل إضافية، مثل شعار المملكة العربية السعودية وشعار زومولار التاريخي.
+
+                </div>
+
+                <div class="price">
+                    <span class="old-price">
+                        130
+                        <img src="riyalsymbol.png" class="riyal-icon" alt="ريال">
+                    </span>
+
+                    <span class="new-price">
+                        96
+                        <img src="riyalsymbol.png" class="riyal-icon" alt="ريال">
+                    </span>
+                </div>
+
+                <div class="sizes">
+                    <button class="size">S</button>
+                    <button class="size">M</button>
+                    <button class="size">L</button>
+                    <button class="size">XL</button>
+                    <button class="size">XXL</button>
+                    <button class="size">XXXL</button>
+                </div>
+
+                <button class="add-button"
+                    onclick="addToCart('السيف | The Sword',96)">
+                    أضف للسلة 🛒
+                </button>
+
+            </div>
+        </div>
+
+
+        <!-- KSA 2 -->
+        <div class="product">
+
+            <div class="product-image-box">
+                <img src="KSA2.png" alt="سعودي أيكونيك" class="product-image">
+            </div>
+
+            <div class="product-info">
+
+                <h3>سعودي أيكونيك | Saudi Iconic</h3>
+
+                <h4 class="description-title">وصف التشيرت</h4>
+
+                <div class="description">
+
+                    اختار المصمم في هذا التصميم أن يضع رمز المملكة العربية السعودية بلغة الإشارة في الجهة اليسرى من التيشرت ناحية القلب، لتكون المملكة في قلب كل من يرتدي التيشرت.
+
+                    <br><br>
+
+                    كما اختار وضع سيف المملكة العربية السعودية في الجهة اليمنى، ومفتاح المملكة +966 في الجهة اليسرى.
+
+                    <br><br>
+
+                    أما في الخلف، فقد اختار المصمم وضع خريطة المملكة العربية السعودية مقسمة إلى مناطقها، حيث تزيّنت كل منطقة بالنقوش التاريخية والثقافية التي تتميز بها.
+
+                    <br><br>
+
+                    وأُضيفت بعض اللمسات المكملة للتصميم، مثل السيفين والنخلة وشعار زومولار التاريخي.
+
+                </div>
+
+                <div class="price">
+                    <span class="old-price">
+                        130
+                        <img src="riyalsymbol.png" class="riyal-icon" alt="ريال">
+                    </span>
+
+                    <span class="new-price">
+                        96
+                        <img src="riyalsymbol.png" class="riyal-icon" alt="ريال">
+                    </span>
+                </div>
+
+                <div class="sizes">
+                    <button class="size">S</button>
+                    <button class="size">M</button>
+                    <button class="size">L</button>
+                    <button class="size">XL</button>
+                    <button class="size">XXL</button>
+                    <button class="size">XXXL</button>
+                </div>
+
+                <button class="add-button"
+                    onclick="addToCart('سعودي أيكونيك | Saudi Iconic',96)">
+                    أضف للسلة 🛒
+                </button>
+
+            </div>
+        </div>
+
+
+        <!-- KSA 3 -->
+        <div class="product">
+
+            <div class="product-image-box">
+                <img src="KSA3.png" alt="سعودي خزاما" class="product-image">
+            </div>
+
+            <div class="product-info">
+
+                <h3>سعودي خزاما | Saudi Khuzama</h3>
+
+                <h4 class="description-title">وصف التشيرت</h4>
+
+                <div class="description">
+
+                    اختار المصمم في هذا التصميم أن يضع رمز النخلة دون السيفين، ليعبر عن الخير والعطاء والسلام.
+
+                    <br><br>
+
+                    كما وضع المصمم في الجهة اليمنى اسم المدينة التي ينتمي إليها العميل، وفي الجهة اليسرى صورة لبرج الساعة في مكة المكرمة، إلى جانب عبارة المملكة العربية السعودية.
+
+                    <br><br>
+
+                    أما في الخلف، فتظهر عبارة SAUDI ARABIA على شكل خريطة المملكة العربية السعودية.
+
+                    <br><br>
+
+                    وفي أسفل التيشرت، تتواجد زهرة الخزامى كأحد رموز الطبيعة السعودية.
+
+                    <br><br>
+
+                    كما أضيف شعار المملكة العربية السعودية ليكتمل التصميم بروح وطنية.
+
+                </div>
+
+                <div class="price">
+                    <span class="old-price">
+                        130
+                        <img src="riyalsymbol.png" class="riyal-icon" alt="ريال">
+                    </span>
+
+                    <span class="new-price">
+                        96
+                        <img src="riyalsymbol.png" class="riyal-icon" alt="ريال">
+                    </span>
+                </div>
+
+                <div class="sizes">
+                    <button class="size">S</button>
+                    <button class="size">M</button>
+                    <button class="size">L</button>
+                    <button class="size">XL</button>
+                    <button class="size">XXL</button>
+                    <button class="size">XXXL</button>
+                </div>
+
+                <button class="add-button"
+                    onclick="addToCart('سعودي خزاما | Saudi Khuzama',96)">
+                    أضف للسلة 🛒
+                </button>
+
+            </div>
+        </div>
+
+
+        <!-- KSA 4 -->
+        <div class="product">
+
+            <div class="product-image-box">
+                <img src="KSA4.png" alt="سعودي هيريتج" class="product-image">
+            </div>
+
+            <div class="product-info">
+
+                <h3>سعودي هيريتج | Saudi Heritage</h3>
+
+                <h4 class="description-title">وصف التشيرت</h4>
+
+                <div class="description">
+
+                    اختار المصمم في هذا التصميم أن يكون رمز القوات الجوية السعودية في الصدر، تعبيرًا عن الاعتزاز بالأمن والأمان الذي تنعم به المملكة.
+
+                    <br><br>
+
+                    كما أضاف المصمم اسم المدينة التي ينتمي إليها العميل في الجهة اليمنى، إلى جانب صورة للبريد الجوي السعودي القديم.
+
+                    <br><br>
+
+                    أما في الخلف، فتتزين خريطة المملكة العربية السعودية باللون الأخضر، وتحتها عبارة SAUDI ARABIA.
+
+                    <br><br>
+
+                    كما أضيفت لمسات مكملة للتصميم، مثل شعار زومولار التاريخي ورمز السيفين والنخلة.
+
+                </div>
+
+                <div class="price">
+                    <span class="old-price">
+                        130
+                        <img src="riyalsymbol.png" class="riyal-icon" alt="ريال">
+                    </span>
+
+                    <span class="new-price">
+                        96
+                        <img src="riyalsymbol.png" class="riyal-icon" alt="ريال">
+                    </span>
+                </div>
+
+                <div class="sizes">
+                    <button class="size">S</button>
+                    <button class="size">M</button>
+                    <button class="size">L</button>
+                    <button class="size">XL</button>
+                    <button class="size">XXL</button>
+                    <button class="size">XXXL</button>
+                </div>
+
+                <button class="add-button"
+                    onclick="addToCart('سعودي هيريتج | Saudi Heritage',96)">
+                    أضف للسلة 🛒
+                </button>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+
+    <h2>تواصل معنا 📞</h2>
+
+    <p>
+        إذا عندك أي استفسار أو تحتاج مساعدة، تواصل معنا مباشرة.
+    </p>
+
+    <div class="contact-buttons">
+
+        <!-- الرقم -->
+        <a
+            href="tel:0502502069"
+            class="contact-button phone-button"
+        >
+            📞 0502502069
+        </a>
+
+        <!-- الواتساب تحت الرقم -->
+        <a
+            href="https://wa.me/966502502069"
+            target="_blank"
+            rel="noopener"
+            class="contact-button whatsapp-button"
+        >
+            💬 واتساب
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- CART -->
+<div id="cartBox" class="cart-box">
+
+    <h2>🛒 سلة المشتريات</h2>
+
+    <div id="cartItems">
+        السلة فاضية.
+    </div>
+
+    <p style="margin:18px 0;">
+        المجموع:
+
+        <strong>
+            <span id="cartTotal">0</span>
+
+            <img
+                src="riyalsymbol.png"
+                alt="ريال"
+                class="riyal-icon"
+            >
+        </strong>
+    </p>
+
+    <button class="close-cart" onclick="toggleCart()">
+        إغلاق
+    </button>
+
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <h2>ZUMOLAR</h2>
+
+    <p>ZUMOLAR — لأنك مختلف. 🔥</p>
+
+    <p>© ZUMOLAR</p>
+
+</footer>
+
+
+<script>
+
+let cart = [];
+
+function addToCart(name,price){
+
+    cart.push({
+        name:name,
+        price:price
+    });
+
+    updateCart();
+
+    alert("تمت إضافة المنتج للسلة 🛒");
+}
+
+function updateCart(){
+
+    document.getElementById("cartCount").textContent = cart.length;
+
+    const items = document.getElementById("cartItems");
+
+    if(cart.length === 0){
+
+        items.innerHTML = "السلة فاضية.";
+
+        document.getElementById("cartTotal").textContent = "0";
+
+        return;
+    }
+
+    let html = "";
+    let total = 0;
+
+    cart.forEach(function(item,index){
+
+        total += item.price;
+
+        html += `
+        <div class="cart-item">
+
+            <strong>${item.name}</strong>
+
+            <br>
+
+            ${item.price}
+
+            <img
+                src="riyalsymbol.png"
+                alt="ريال"
+                class="riyal-icon"
+            >
+
+            <br>
+
+            <button
+                class="remove-button"
+                onclick="removeFromCart(${index})"
+            >
+                حذف
+            </button>
+
+        </div>
+        `;
+    });
+
+    items.innerHTML = html;
+
+    document.getElementById("cartTotal").textContent = total;
+}
+
+function removeFromCart(index){
+
+    cart.splice(index,1);
+
+    updateCart();
+}
+
+function toggleCart(){
+
+    document
+        .getElementById("cartBox")
+        .classList
+        .toggle("show");
+}
+
+document
+    .querySelectorAll(".size")
+    .forEach(function(button){
+
+        button.addEventListener("click",function(){
+
+            const parent = button.parentElement;
+
+            parent
+                .querySelectorAll(".size")
+                .forEach(function(item){
+                    item.classList.remove("selected");
+                });
+
+            button.classList.add("selected");
+
+        });
+
+    });
+
+</script>
+
+</body>
+</html>
