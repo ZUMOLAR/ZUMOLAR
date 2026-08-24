@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<head>
+    <style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: white;
+    color: #222;
+    text-align: center;
+}
+
+header {
+    background: white;
+    padding: 20px;
+    border-bottom: 3px solid #7c3aed;
+}
+
+header h1 {
+    color: #7c3aed;
+    font-size: 40px;
+    margin: 10px;
+}
+
+nav {
+    margin: 20px;
+}
+
+nav a {
+    color: #222;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 10px;
+}
+
+nav a:hover {
+    color: #7c3aed;
+}
+
+button {
+    border: none;
+    padding: 10px 18px;
+    margin: 4px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+section {
+    padding: 50px 20px;
+}
+
+section h2 {
+    font-size: 35px;
+}
+
+
+/* ================= ZUMOLAR ================= */
+
+#zumolar {
+    background: #f5efff;
+    border-top: 8px solid #7c3aed;
+}
+
+#zumolar h2 {
+    color: #7c3aed;
+}
+
+#zumolar button {
+    background: #7c3aed;
+    color: white;
+}
+
+
+/* ================= MARVEL ================= */
+
+#marvel {
+    background: #fff0f0;
+    border-top: 8px solid #e50914;
+}
+
+#marvel h2 {
+    color: #e50914;
+}
+
+#marvel button {
+    background: #e50914;
+    color: white;
+}
+
+
+/* ================= المملكة ================= */
+
+#saudi {
+    background: #effff5;
+    border-top: 8px solid #006c35;
+}
+
+#saudi h2 {
+    color: #006c35;
+}
+
+#saudi button {
+    background: #006c35;
+    color: white;
+}
+
+
+/* ================= الصور ================= */
+
+img {
+    max-width: 90%;
+    height: auto;
+    border-radius: 15px;
+    margin: 15px;
+}
+
+
+/* ================= الفوتر ================= */
+
+footer {
+    background: #222;
+    color: white;
+    padding: 35px;
+}
+
+footer h2 {
+    color: #7c3aed;
+}
+
+
+/* ================= الجوال ================= */
+
+@media (max-width: 600px) {
+
+    header h1 {
+        font-size: 30px;
+    }
+
+    nav a {
+        display: block;
+        margin: 12px;
+    }
+
+    section h2 {
+        font-size: 28px;
+    }
+
+}
+
+</style>
