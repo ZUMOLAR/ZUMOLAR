@@ -1,0 +1,1968 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZUMOLAR</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Tahoma,sans-serif;background:#fff;color:#171717}
+button,input,textarea,select{font-family:inherit}
+html{scroll-behavior:smooth}
+
+.welcome{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  background:#f6f4f0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  transition:.7s
+}
+.welcome.hide{
+  opacity:0;
+  visibility:hidden
+}
+.welcome-content{
+  animation:welcomeIn .8s ease
+}
+.welcome-content img{
+  width:330px;
+  max-width:75vw;
+  max-height:240px;
+  object-fit:contain
+}
+.welcome h1{
+  font-size:38px;
+  margin:15px 0 8px
+}
+.welcome p{
+  color:#666;
+  margin-bottom:25px
+}
+@keyframes welcomeIn{
+  from{opacity:0;transform:translateY(25px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:#fff;
+  min-height:78px;
+  padding:10px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  box-shadow:0 4px 20px #0000000d
+}
+.logo{
+  width:145px;
+  height:58px;
+  object-fit:contain
+}
+nav{
+  display:flex;
+  gap:20px;
+  align-items:center;
+  flex-wrap:wrap;
+  justify-content:center
+}
+nav a{
+  text-decoration:none;
+  color:#171717;
+  font-weight:bold;
+  font-size:14px
+}
+.cart-btn{
+  border:0;
+  background:#171717;
+  color:#fff;
+  border-radius:30px;
+  padding:11px 18px;
+  cursor:pointer;
+  font-weight:bold
+}
+
+.hero{
+  min-height:650px;
+  padding:70px 20px;
+  background:#f5f3ef;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center
+}
+.hero-logo{
+  width:650px;
+  max-width:90vw;
+  max-height:330px;
+  object-fit:contain
+}
+.hero h1{
+  font-size:45px;
+  font-weight:900;
+  margin:15px 0
+}
+.hero p{
+  max-width:700px;
+  color:#555;
+  line-height:2;
+  margin-bottom:25px
+}
+.hero a{
+  background:#171717;
+  color:#fff;
+  text-decoration:none;
+  padding:14px 35px;
+  border-radius:35px;
+  font-weight:bold
+}
+
+.stats{
+  background:#171717;
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  gap:80px;
+  padding:18px
+}
+.stat{text-align:center}
+.stat strong{
+  display:block;
+  font-size:25px
+}
+.stat span{
+  color:#ccc;
+  font-size:13px
+}
+.rating{color:#ffd34d}
+
+.section{padding:90px 5%}
+.section-title{
+  text-align:center;
+  margin-bottom:40px
+}
+.section-title h2{
+  font-size:38px;
+  font-weight:900;
+  margin-bottom:10px
+}
+.section-title p{color:#777}
+
+.story-grid{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:18px
+}
+.story-card{
+  background:#f5f3ef;
+  border-radius:22px;
+  padding:28px 18px;
+  text-align:center;
+  box-shadow:0 8px 25px #0000000c
+}
+.story-card h3{margin-bottom:13px}
+.story-card p{
+  color:#555;
+  line-height:2;
+  font-size:13px
+}
+
+.collection-grid{
+  max-width:1000px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:30px
+}
+.collection{
+  min-height:340px;
+  border-radius:30px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-decoration:none;
+  box-shadow:0 12px 35px #00000010
+}
+.collection img{
+  width:300px;
+  height:200px;
+  max-width:80%;
+  object-fit:contain
+}
+.collection h3{
+  font-size:25px;
+  margin-top:15px;
+  color:#171717
+}
+.zumolar-col{background:#f5f3ef}
+.saudi-col{background:#006c35}
+.saudi-col h3{color:#fff}
+
+.products-section{
+  padding:90px 5%
+}
+#zumolar{background:#f5f3ef}
+#saudi{
+  background:#006c35;
+  color:#fff
+}
+#saudi .section-title h2{color:#fff}
+#saudi .section-title p{color:#eee}
+.section-logo{
+  display:block;
+  width:260px;
+  height:170px;
+  margin:0 auto 10px;
+  object-fit:contain
+}
+
+.tools{
+  max-width:1200px;
+  margin:0 auto 30px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap
+}
+.search{
+  flex:1;
+  min-width:220px;
+  border:1px solid #ddd;
+  border-radius:30px;
+  padding:14px 20px;
+  outline:none;
+  background:#fff
+}
+.filter{
+  border:0;
+  background:#fff;
+  padding:13px 20px;
+  border-radius:30px;
+  cursor:pointer;
+  font-weight:bold
+}
+.filter.active{
+  background:#171717;
+  color:#fff
+}
+.filter.available.active{background:#00833f}
+.filter.out.active{background:#d90000}
+
+.product-grid{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:30px
+}
+.product{
+  background:#fff;
+  color:#171717;
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow:0 12px 35px #00000012
+}
+.product.hide{display:none}
+.product-image{
+  position:relative;
+  background:#f7f7f7;
+  overflow:hidden
+}
+.product-image img{
+  width:100%;
+  height:520px;
+  object-fit:cover;
+  display:block;
+  transition:.2s
+}
+.arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:5;
+  width:48px;
+  height:48px;
+  border:0;
+  border-radius:50%;
+  background:#fffffff0;
+  color:#171717;
+  box-shadow:0 5px 20px #0003;
+  cursor:pointer;
+  font-size:24px
+}
+.arrow.right{right:15px}
+.arrow.left{left:15px}
+
+.stock{
+  position:absolute;
+  top:15px;
+  right:15px;
+  z-index:10;
+  color:#fff;
+  padding:8px 16px;
+  border-radius:25px;
+  font-size:13px;
+  font-weight:bold
+}
+.available{background:#00833f}
+.sold{background:#d90000}
+
+.product-info{
+  padding:27px;
+  text-align:center
+}
+.product-info h3{
+  font-size:25px;
+  margin-bottom:10px
+}
+.desc-title{
+  font-size:17px;
+  margin:18px 0 8px
+}
+.desc{
+  background:#fafafa;
+  border-radius:17px;
+  padding:20px;
+  text-align:right;
+  color:#444;
+  line-height:2;
+  font-size:14px
+}
+
+.price{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:15px;
+  margin:18px 0;
+  font-size:23px;
+  font-weight:bold
+}
+.old{
+  color:#999;
+  text-decoration:line-through;
+  font-size:17px
+}
+.new{color:#006c35}
+.sar-icon{
+  width:25px;
+  height:25px;
+  object-fit:contain;
+  vertical-align:middle;
+  margin-right:4px
+}
+
+.sizes{
+  display:flex;
+  justify-content:center;
+  gap:7px;
+  flex-wrap:wrap;
+  margin:18px 0
+}
+.size{
+  border:1px solid #ddd;
+  background:#fff;
+  padding:8px 12px;
+  border-radius:9px;
+  cursor:pointer
+}
+.size.selected{
+  background:#171717;
+  color:#fff
+}
+.add,.notify{
+  width:100%;
+  max-width:270px;
+  border:0;
+  color:#fff;
+  padding:13px 20px;
+  border-radius:30px;
+  cursor:pointer;
+  font-weight:bold
+}
+.add{background:#171717}
+.notify{background:#d90000}
+
+.notify-form{
+  display:none;
+  max-width:420px;
+  margin:15px auto 0;
+  background:#f5f3ef;
+  border-radius:20px;
+  padding:20px;
+  text-align:right
+}
+.notify-form.show{display:block}
+.notify-form label{
+  display:block;
+  font-size:13px;
+  font-weight:bold;
+  margin:8px 0 5px
+}
+.notify-form input{
+  width:100%;
+  border:1px solid #ddd;
+  border-radius:12px;
+  padding:13px;
+  outline:none;
+  background:#fff
+}
+.notify-submit{
+  width:100%;
+  margin-top:12px;
+  border:0;
+  background:#171717;
+  color:#fff;
+  border-radius:25px;
+  padding:13px;
+  cursor:pointer;
+  font-weight:bold
+}
+.success{
+  background:#e9f8ef;
+  color:#00713b;
+  border-radius:15px;
+  padding:15px;
+  text-align:center;
+  line-height:2
+}
+
+.review-grid{
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px
+}
+.review{
+  background:#f5f3ef;
+  padding:25px;
+  border-radius:23px
+}
+.stars{
+  color:#e4a600;
+  font-size:20px;
+  margin-bottom:10px
+}
+.review p{
+  color:#444;
+  line-height:2;
+  margin-bottom:15px
+}
+.review .city{
+  color:#777;
+  font-size:13px;
+  margin-top:5px
+}
+.review-form{
+  max-width:700px;
+  margin:45px auto 0;
+  padding:28px;
+  border-radius:25px;
+  background:#f5f3ef
+}
+.review-form h3{
+  text-align:center;
+  margin-bottom:20px
+}
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px
+}
+.review-form input,
+.review-form textarea,
+.review-form select{
+  width:100%;
+  border:1px solid #ddd;
+  border-radius:13px;
+  padding:13px;
+  outline:none;
+  background:#fff
+}
+.review-form select{margin-top:12px}
+.review-form textarea{
+  height:110px;
+  margin-top:12px;
+  resize:vertical
+}
+.review-submit{
+  display:block;
+  margin:14px auto 0;
+  border:0;
+  background:#171717;
+  color:#fff;
+  padding:13px 30px;
+  border-radius:30px;
+  cursor:pointer;
+  font-weight:bold
+}
+
+/* تواصل معنا */
+.contact{
+  background:#f5f3ef;
+  text-align:center
+}
+.contact-box{
+  max-width:700px;
+  margin:35px auto 0;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px
+}
+.contact-card{
+  background:#fff;
+  border:1px solid #e9e9e9;
+  border-radius:18px;
+  padding:20px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  text-align:right;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
+  transition:.2s
+}
+.contact-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 25px rgba(0,0,0,.1)
+}
+.contact-icon{
+  width:48px;
+  height:48px;
+  min-width:48px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px
+}
+.phone-icon{background:#eef2ff}
+.wa-icon{background:#e8f9ee}
+.contact-card span{
+  display:block;
+  color:#888;
+  font-size:13px;
+  margin-bottom:5px
+}
+.contact-card a{
+  display:block;
+  color:#171717;
+  text-decoration:none;
+  font-size:17px;
+  font-weight:bold
+}
+.contact-card:last-child a{color:#19a854}
+
+.cart{
+  position:fixed;
+  top:95px;
+  left:20px;
+  width:410px;
+  max-width:calc(100% - 40px);
+  background:#fff;
+  border-radius:25px;
+  padding:25px;
+  z-index:5000;
+  box-shadow:0 15px 50px #0004;
+  display:none
+}
+.cart.show{display:block}
+.cart h2{margin-bottom:18px}
+
+.cart-item{
+  padding:15px 0;
+  border-bottom:1px solid #eee
+}
+.cart-product{
+  display:flex;
+  gap:12px;
+  align-items:center
+}
+.cart-product-img{
+  width:78px;
+  height:88px;
+  object-fit:cover;
+  border-radius:12px;
+  background:#f5f5f5;
+  flex-shrink:0
+}
+.cart-product-info{
+  flex:1;
+  min-width:0
+}
+.cart-item-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  font-weight:bold
+}
+.cart-item-price{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  color:#555;
+  margin-top:5px
+}
+.cart-item-total{
+  font-weight:bold;
+  color:#006c35;
+  margin-top:5px
+}
+.cart-sar{
+  width:21px;
+  height:21px;
+  object-fit:contain
+}
+.remove{
+  margin-top:9px;
+  border:0;
+  background:#d90000;
+  color:#fff;
+  padding:6px 12px;
+  border-radius:10px;
+  cursor:pointer
+}
+
+/* مستطيل المجموع أبيض */
+.cart-total{
+  margin:18px 0;
+  padding:15px;
+  background:#fff;
+  border:1px solid #e7e7e7;
+  border-radius:15px;
+  font-size:20px;
+  font-weight:bold;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:5px;
+  box-shadow:0 4px 15px #00000008
+}
+.cart-total .sar-icon{
+  width:27px;
+  height:27px
+}
+
+.whatsapp-order{
+  width:100%;
+  border:0;
+  background:#25d366;
+  color:#fff;
+  padding:14px;
+  border-radius:30px;
+  cursor:pointer;
+  font-weight:bold;
+  font-size:15px
+}
+.close-cart{
+  width:100%;
+  margin-top:10px;
+  border:0;
+  background:#171717;
+  color:#fff;
+  padding:12px;
+  border-radius:30px;
+  cursor:pointer
+}
+
+footer{
+  background:#171717;
+  color:#fff;
+  text-align:center;
+  padding:55px 20px
+}
+footer p{
+  color:#ccc;
+  margin-top:8px
+}
+
+@media(max-width:900px){
+header{
+  justify-content:center;
+  flex-wrap:wrap
+}
+nav{
+  width:100%;
+  order:3
+}
+.story-grid{
+  grid-template-columns:repeat(2,1fr)
+}
+.review-grid{
+  grid-template-columns:1fr;
+  max-width:600px
+}
+}
+
+@media(max-width:600px){
+.hero h1{font-size:33px}
+.stats{gap:10px}
+.stat{min-width:95px}
+.stat strong{font-size:19px}
+.collection-grid,.product-grid{
+  grid-template-columns:1fr
+}
+.story-grid{
+  grid-template-columns:1fr
+}
+.row,.contact-box{
+  grid-template-columns:1fr
+}
+.product-image img{
+  height:390px
+}
+.search{
+  flex:none;
+  width:100%
+}
+.cart{
+  left:10px;
+  right:10px;
+  width:auto;
+  max-width:none
+}
+}
+</style>
+</head>
+
+<body>
+
+<!-- شاشة الترحيب -->
+<div class="welcome" id="welcome">
+  <div class="welcome-content">
+    <img src="logo.png" alt="ZUMOLAR">
+    <h1>حياك الله، تو ما نور الموقع </h1>
+    <p>تصاميم مختلفة، تفاصيل لها معنى، وستايل ما يحتاج شرح.</p>
+  </div>
+</div>
+
+<header>
+  <a href="#home">
+    <img src="logo.png" class="logo" alt="ZUMOLAR">
+  </a>
+
+  <nav>
+    <a href="#home">الرئيسية</a>
+    <a href="#story">قصتنا وهويتنا</a>
+    <a href="#collections">منتجاتنا</a>
+    <a href="#zumolar">ZUMOLAR</a>
+    <a href="#saudi">السعودية</a>
+    <a href="#reviews">آراء العملاء</a>
+    <a href="#contact">تواصل معنا</a>
+  </nav>
+
+  <button class="cart-btn" onclick="toggleCart()">
+    🛒 السلة (<span id="cartCount">0</span>)
+  </button>
+</header>
+
+<section class="hero" id="home">
+  <img src="logo.png" class="hero-logo" alt="ZUMOLAR">
+  <h1>حياك بيننا، وخلك مستعد تشوف شي مو عادي.</h1>
+  <p>تصاميم مختلفة، تفاصيل لها معنى، وستايل ما يحتاج شرح.</p>
+  <a h ref="#collections">شوف اللي يليق فيك 👀🔥</a>
+</section>
+
+<div class="stats">
+  <div class="stat">
+    <strong>1000+</strong>
+    <span>طلب تم تنفيذه 🔥</span>
+  </div>
+  <div class="stat">
+    <strong class="rating">★ 4.6</strong>
+    <span>تقييم العملاء</span>
+  </div>
+  <div class="stat">
+    <strong>1000+</strong>
+    <span>عميل وثق فينا ❤️</span>
+  </div>
+</div>
+
+<section class="section" id="story">
+  <div class="section-title">
+    <h2>قصتنا وهويتنا 🔥</h2>
+    <p>مو مجرد تشيرات... هذي هوية تلبسها.</p>
+  </div>
+
+  <div class="story-grid">
+    <div class="story-card">
+      <h3>قصتنا وهويتنا</h3>
+      <p>بدأت ZUMOLAR من فكرة بسيطة: نبي نصنع ملابس ما تكون مجرد قطعة تنلبس، بل تصميم له شخصية وحكاية.</p>
+    </div>
+
+    <div class="story-card">
+      <h3>هدفنا 🎯</h3>
+      <p>نصنع تشيرات تجمع بين الجودة والتصميم المختلف ونخلي كل شخص يلقى قطعة تشبه شخصيته.</p>
+    </div>
+
+    <div class="story-card">
+      <h3>رسالتنا 💡</h3>
+      <p>الاختلاف مو شيء تخفيه، الاختلاف شيء تفتخر فيه.</p>
+    </div>
+
+    <div class="story-card">
+      <h3>قيمنا ❤️</h3>
+      <p>الجودة، الإبداع، الاهتمام بالتفاصيل، والصدق مع العميل.</p>
+    </div>
+
+    <div class="story-card">
+      <h3>أسلوبنا 🔥</h3>
+      <p>أسلوب ZUMOLAR جريء، شبابي ومختلف.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="collections">
+  <div class="section-title">
+    <h2>منتجاتنا 👀</h2>
+    <p>شوف اللي يليق فيك 👀🔥</p>
+  </div>
+
+  <div class="collection-grid">
+
+    <a class="collection zumolar-col" href="#zumolar">
+      <img src="zumolar-collection.png" alt="ZUMOLAR">
+      <h3>ZUMOLAR</h3>
+    </a>
+
+    <a class="collection saudi-col" href="#saudi">
+      <img src="saudi-logo.png" alt="السعودية">
+      <h3>المجموعة السعودية 🇸🇦</h3>
+    </a>
+
+  </div>
+</section>
+
+<!-- مجموعة ZUMOLAR -->
+<section class="products-section" id="zumolar">
+
+  <div class="section-title">
+    <img src="zumolar-collection.png" class="section-logo" alt="ZUMOLAR">
+    <h2>مجموعة ZUMOLAR</h2>
+    <p>تصاميم مختلفة، لناس تحب تكون مختلفة.</p>
+  </div>
+
+  <div class="tools">
+    <input
+      class="search"
+      id="zumolarSearch"
+      placeholder="🔎 ابحث عن تشيرت..."
+      oninput="filterProducts('zumolar')"
+    >
+
+    <button class="filter active" onclick="setFilter('zumolar','all',this)">الكل</button>
+    <button class="filter available" onclick="setFilter('zumolar','available',this)">🟢 متوفرة</button>
+    <button class="filter out" onclick="setFilter('zumolar','out',this)">🔴 نفذت الكمية</button>
+  </div>
+
+  <div class="product-grid" id="zumolarGrid">
+
+    <!-- باتمان -->
+    <div class="product" data-name="باتمان Batman" data-stock="available">
+
+      <div class="product-image">
+        <div class="stock available">متوفرة</div>
+
+        <button class="arrow right" onclick="changeImage(this,-1)">❯</button>
+
+        <img
+          src="batman-new.png"
+          data-images="batman-new.png,batman.png"
+          data-index="0"
+          alt="Batman"
+        >
+
+        <button class="arrow left" onclick="changeImage(this,1)">❮</button>
+      </div>
+
+      <div class="product-info">
+
+        <h3>باتمان | BATMAN</h3>
+
+        <h4 class="desc-title">وصف التشيرت</h4>
+
+        <div class="desc">
+          اختار المصمم في هذا التصميم الخاص بتيشرت BATMAN أن يكون شعار باتمان في منتصف الصدر، ليكون العنصر الأساسي الذي يعبر عن هوية فارس الظلام.
+          <br><br>
+          وفي الجهة اليمنى، أضاف المصمم صورة لباتمان، بينما وضع في الجهة اليسرى صورة للجوكر، أشهر خصومه، ليعكس التصميم الصراع الأسطوري بين الخير والشر في عالم باتمان.
+          <br><br>
+          أما في الخلف، فتظهر مكونات سيارة باتمان الأسطورية (Batmobile) بتفاصيل مستوحاة من التصميم الهندسي، لتمنح التيشرت طابعًا فريدًا لمحبي عالم BATMAN.
+          <br><br>
+          كما تمت إضافة شعار DC وشعار زومولار التاريخي كلمسات مكملة للتصميم، لتكتمل هوية التيشرت المستوحاة من عالم باتمان.
+        </div>
+
+        <div class="price">
+          <span class="old">150 <img src="riyalsymbol.png" class="sar-icon"></span>
+          <span class="new">100 <img src="riyalsymbol.png" class="sar-icon"></span>
+        </div>
+
+        <div class="sizes">
+          <button class="size">S</button>
+          <button class="size">M</button>
+          <button class="size">L</button>
+          <button class="size">XL</button>
+          <button class="size">XXL</button>
+          <button class="size">XXXL</button>
+        </div>
+
+        <button class="add" onclick="addToCart('باتمان | BATMAN',100,this)">
+          أضف للسلة 🛒
+        </button>
+
+      </div>
+    </div>
+
+    <!-- سبايدر مان -->
+    <div class="product" data-name="سبايدر مان Spider Man" data-stock="available">
+
+      <div class="product-image">
+        <div class="stock available">متوفرة</div>
+
+        <button class="arrow right" onclick="changeImage(this,-1)">❯</button>
+
+        <img
+          src="spiderman-new.png"
+          data-images="spiderman-new.png,spiderman.png"
+          data-index="0"
+          alt="Spider Man"
+        >
+
+        <button class="arrow left" onclick="changeImage(this,1)">❮</button>
+      </div>
+
+      <div class="product-info">
+
+        <h3>سبايدر مان | Spider-Man</h3>
+
+        <h4 class="desc-title">وصف التشيرت</h4>
+
+        <div class="desc">
+          اختار المصمم في هذا التصميم أن يكون شعار Spider-Man في منتصف الصدر، ليكون العنصر الأساسي الذي يعكس هوية الشخصية وقوتها.
+          <br><br>
+          وفي الجهة اليمنى، أضاف المصمم صورة لـ Spider-Man، بينما اختار في الجهة اليسرى وضع عيون Spider-Man الشهيرة، ليجمع التصميم بين أبرز رموز الشخصية بأسلوب عصري ومميز.
+          <br><br>
+          كما أضاف المصمم أسفل شعار Spider-Man رأس Spider-Man يخرج من الجهة اليسرى، ليمنح التصميم لمسة حركية وجذابة. وفي الخلف، وضع ثلاثة من شعارات Spider-Man بتنسيق مميز.
+          <br><br>
+          وفي الجزء العلوي من التصميم، يتواجد شعار MARVEL، إلى جانب شعار زومولار التاريخي، لتكتمل تفاصيل التصميم بروح مستوحاة من عالم الأبطال الخارقين.
+        </div>
+
+        <div class="price">
+          <span class="old">150 <img src="riyalsymbol.png" class="sar-icon"></span>
+          <span class="new">100 <img src="riyalsymbol.png" class="sar-icon"></span>
+        </div>
+
+        <div class="sizes">
+          <button class="size">S</button>
+          <button class="size">M</button>
+          <button class="size">L</button>
+          <button class="size">XL</button>
+          <button class="size">XXL</button>
+          <button class="size">XXXL</button>
+        </div>
+
+        <button class="add" onclick="addToCart('سبايدر مان | Spider-Man',100,this)">
+          أضف للسلة 🛒
+        </button>
+
+      </div>
+    </div>
+
+    <!-- كابتن أمريكا -->
+    <div class="product" data-name="كابتن أمريكا Captain America" data-stock="out">
+
+      <div class="product-image">
+        <div class="stock sold">نفذت الكمية</div>
+
+        <button class="arrow right" onclick="changeImage(this,-1)">❯</button>
+
+        <img
+          src="captain-america-new.png"
+          data-images="captain-america-new.png,captain-america.png"
+          data-index="0"
+          alt="Captain America"
+        >
+
+        <button class="arrow left" onclick="changeImage(this,1)">❮</button>
+      </div>
+
+      <div class="product-info">
+
+        <h3>كابتن أمريكا | Captain America</h3>
+
+        <h4 class="desc-title">وصف التشيرت</h4>
+
+        <div class="desc">
+          اختار المصمم في هذا التصميم الخاص بتيشرت CAPTAIN AMERICA أن يكون شعار كابتن أمريكا في منتصف الصدر، ليكون العنصر الأساسي الذي يعكس هوية الشخصية وقوتها ورمزها الشهير.
+          <br><br>
+          وفي التصميم، تظهر تفاصيل مستوحاة من شخصية كابتن أمريكا وعالم الأبطال الخارقين، لتجمع بين الطابع البطولي والألوان المميزة للشخصية بأسلوب عصري وجذاب.
+          <br><br>
+          أما في الخلف، فتظهر عناصر مستوحاة من هوية كابتن أمريكا، مع تفاصيل تمنح التيشرت طابعًا مميزًا لمحبي الشخصية وعالم MARVEL.
+          <br><br>
+          كما أضيفت لمسات مكملة للتصميم، مثل شعار MARVEL وشعار زومولار التاريخي، لتكتمل هوية التيشرت بروح مستوحاة من عالم الأبطال الخارقين وبأسلوب ZUMOLAR الخاص.
+        </div>
+
+        <div class="price">
+          <span class="old">150 <img src="riyalsymbol.png" class="sar-icon"></span>
+          <span class="new">100 <img src="riyalsymbol.png" class="sar-icon"></span>
+        </div>
+
+        <div class="sizes">
+          <button class="size">S</button>
+          <button class="size">M</button>
+          <button class="size">L</button>
+          <button class="size">XL</button>
+          <button class="size">XXL</button>
+          <button class="size">XXXL</button>
+        </div>
+
+        <button class="notify" onclick="toggleNotify(this)">
+          🔔 أبلغني عند وجود كمية
+        </button>
+
+        <div class="notify-form">
+
+          <label>الاسم *</label>
+          <input class="notify-name" type="text" placeholder="اكتب اسمك">
+
+          <label>رقم الجوال *</label>
+          <input class="notify-phone" type="tel" placeholder="05xxxxxxxx">
+
+          <label>البريد الإلكتروني (اختياري)</label>
+          <input class="notify-email" type="email" placeholder="example@email.com">
+
+          <button
+            class="notify-submit"
+            onclick="saveNotify(this,'كابتن أمريكا | Captain America')"
+          >
+            تسجيل التنبيه 🔔
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- المجموعة السعودية -->
+<section class="products-section" id="saudi">
+
+  <div class="section-title">
+    <img src="saudi-logo.png" class="section-logo" alt="السعودية">
+    <h2>المجموعة السعودية 🇸🇦</h2>
+    <p>تصاميم مستوحاة من هوية المملكة.</p>
+  </div>
+
+  <div class="tools">
+
+    <input
+      class="search"
+      id="saudiSearch"
+      placeholder="🔎 ابحث عن تشيرت..."
+      oninput="filterProducts('saudi')"
+    >
+
+    <button class="filter active" onclick="setFilter('saudi','all',this)">
+      الكل
+    </button>
+
+    <button class="filter available" onclick="setFilter('saudi','available',this)">
+      🟢 متوفرة
+    </button>
+
+    <button class="filter out" onclick="setFilter('saudi','out',this)">
+      🔴 نفذت الكمية
+    </button>
+
+  </div>
+
+  <div class="product-grid" id="saudiGrid">
+
+    <!-- السيف -->
+    <div class="product" data-name="السيف The Sword" data-stock="available">
+
+      <div class="product-image">
+        <div class="stock available">متوفرة</div>
+
+        <button class="arrow right" onclick="changeImage(this,-1)">❯</button>
+
+        <img
+          src="KSA1-new.png"
+          data-images="KSA1-new.png,KSA1.png"
+          data-index="0"
+          alt="السيف"
+        >
+
+        <button class="arrow left" onclick="changeImage(this,1)">❮</button>
+      </div>
+
+      <div class="product-info">
+
+        <h3>السيف | The Sword</h3>
+
+        <h4 class="desc-title">وصف التشيرت</h4>
+
+        <div class="desc">
+          في تصميم تيشرت اليوم الوطني السعودي الـ96، اختار المصمم أن يتربّع سيف العلم السعودي في أعلى الصدر، ليكون رمزًا بارزًا للقوة، كما أضاف اسم المدينة التي ينتمي إليها العميل في يمناه، ومفتاح المملكة +966 في الجهة اليسرى.
+          <br><br>
+          وأُضيفت لمسات من اسم المملكة العربية السعودية باللغة الإنجليزية: “Kingdom of Saudi Arabia”، حيث تكرر الاسم عشر مرات ليمنح التصميم طابعًا مميزًا. وفوقها تأتي كلمة «سعودي» بخط أخضر عريض، تعبيرًا عن الفخر والانتماء الوطني.
+          <br><br>
+          كما يحتوي التصميم على تفاصيل إضافية، مثل شعار المملكة العربية السعودية وشعار زومولار التاريخي، لتكتمل الهوية الوطنية للتصميم بروح عصرية.
+        </div>
+
+        <div class="price">
+          <span class="old">130 <img src="riyalsymbol.png" class="sar-icon"></span>
+          <span class="new">96 <img src="riyalsymbol.png" class="sar-icon"></span>
+        </div>
+
+        <div class="sizes">
+          <button class="size">S</button>
+          <button class="size">M</button>
+          <button class="size">L</button>
+          <button class="size">XL</button>
+          <button class="size">XXL</button>
+          <button class="size">XXXL</button>
+        </div>
+
+        <button class="add" onclick="addToCart('السيف | The Sword',96,this)">
+          أضف للسلة 🛒
+        </button>
+
+      </div>
+    </div>
+
+    <!-- سعودي أيكونك -->
+    <div class="product" data-name="سعودي أيكونك Saudi Iconic" data-stock="available">
+
+      <div class="product-image">
+        <div class="stock available">متوفرة</div>
+
+        <button class="arrow right" onclick="changeImage(this,-1)">❯</button>
+
+        <img
+          src="KSA2-new.png"
+          data-images="KSA2-new.png,KSA2.png"
+          data-index="0"
+          alt="سعودي أيكونك"
+        >
+
+        <button class="arrow left" onclick="changeImage(this,1)">❮</button>
+      </div>
+
+      <div class="product-info">
+
+        <h3>سعودي أيكونك | Saudi Iconic</h3>
+
+        <h4 class="desc-title">وصف التشيرت</h4>
+
+        <div class="desc">
+          اختار المصمم في هذا التصميم أن يضع رمز المملكة العربية السعودية بلغة الإشارة، المتمثل بإغلاق إصبعي البنصر والإبهام ورفع السبابة والوسطى والخنصر، في الجهة اليسرى من التيشرت ناحية القلب، لتكون المملكة في قلب كل من يرتدي التيشرت.
+          <br><br>
+          كما اختار وضع سيف المملكة العربية السعودية في الجهة اليمنى، ومفتاح المملكة +966 في الجهة اليسرى.
+          <br><br>
+          أما في الخلف، فقد اختار المصمم وضع خريطة المملكة العربية السعودية مقسمة إلى مناطقها، حيث تزيّنت كل منطقة بالنقوش التاريخية والثقافية التي تتميز بها، ليعكس التصميم تنوع وجمال مناطق المملكة.
+          <br><br>
+          وأُضيفت بعض اللمسات المكملة للتصميم، مثل السيفين والنخلة وشعار زومولار التاريخي، لتكتمل الهوية الوطنية للتصميم بروح تجمع بين الفخر والانتماء والهوية السعودية.
+        </div>
+
+        <div class="price">
+          <span class="old">130 <img src="riyalsymbol.png" class="sar-icon"></span>
+          <span class="new">96 <img src="riyalsymbol.png" class="sar-icon"></span>
+        </div>
+
+        <div class="sizes">
+          <button class="size">S</button>
+          <button class="size">M</button>
+          <button class="size">L</button>
+          <button class="size">XL</button>
+          <button class="size">XXL</button>
+          <button class="size">XXXL</button>
+        </div>
+
+        <button class="add" onclick="addToCart('سعودي أيكونك | Saudi Iconic',96,this)">
+          أضف للسلة 🛒
+        </button>
+
+      </div>
+    </div>
+
+    <!-- خزامى -->
+    <div class="product" data-name="خزامى Khuzama" data-stock="available">
+
+      <div class="product-image">
+        <div class="stock available">متوفرة</div>
+
+        <button class="arrow right" onclick="changeImage(this,-1)">❯</button>
+
+        <img
+          src="KSA3-new.png"
+          data-images="KSA3-new.png,KSA3.png"
+          data-index="0"
+          alt="خزامى"
+        >
+
+        <button class="arrow left" onclick="changeImage(this,1)">❮</button>
+      </div>
+
+      <div class="product-info">
+
+        <h3>خزامى | Khuzama</h3>
+
+        <h4 class="desc-title">وصف التشيرت</h4>
+
+        <div class="desc">
+          اختار المصمم في هذا التصميم أن يضع رمز النخلة دون السيفين، ليعبر عن الخير والعطاء والسلام. فالنخلة جزء من شعار المملكة العربية السعودية، وترمز إلى الخير والنماء، بينما يرمز السيفان إلى القوة والعزم. وجاء اختيار النخلة ليعكس مكانة المملكة بوصفها أرض السلام والإسلام.
+          <br><br>
+          كما وضع المصمم في الجهة اليمنى اسم المدينة التي ينتمي إليها العميل، وفي الجهة اليسرى صورة لبرج الساعة في مكة المكرمة، إلى جانب عبارة المملكة العربية السعودية، في تصميم يجمع بين الانتماء للوطن والارتباط بأقدس بقاع الأرض.
+          <br><br>
+          أما في الخلف، فتظهر عبارة SAUDI ARABIA على شكل خريطة المملكة العربية السعودية، لتكون الخريطة والكلمات معًا رمزًا يجمع بين الجغرافيا والهوية الوطنية.
+          <br><br>
+          وفي أسفل التيشرت، تتواجد زهرة الخزامى كأحد رموز الطبيعة السعودية، في لمسة مستوحاة من جمال أرض المملكة وتنوعها، لتضيف للتصميم طابعًا مميزًا يجمع بين الفخر والهوية والطبيعة السعودية.
+          <br><br>
+          كما أضيف شعار المملكة العربية السعودية ليكتمل التصميم بروح وطنية تعبر عن العز والانتماء والفخر بالوطن.
+        </div>
+
+        <div class="price">
+          <span class="old">130 <img src="riyalsymbol.png" class="sar-icon"></span>
+          <span class="new">96 <img src="riyalsymbol.png" class="sar-icon"></span>
+        </div>
+
+        <div class="sizes">
+          <button class="size">S</button>
+          <button class="size">M</button>
+          <button class="size">L</button>
+          <button class="size">XL</button>
+          <button class="size">XXL</button>
+          <button class="size">XXXL</button>
+        </div>
+
+        <button class="add" onclick="addToCart('خزامى | Khuzama',96,this)">
+          أضف للسلة 🛒
+        </button>
+
+      </div>
+    </div>
+
+    <!-- ونق -->
+    <div class="product" data-name="ونق Wanaq" data-stock="available">
+
+      <div class="product-image">
+        <div class="stock available">متوفرة</div>
+
+        <button class="arrow right" onclick="changeImage(this,-1)">❯</button>
+
+        <img
+          src="KSA4-new.png"
+          data-images="KSA4-new.png,KSA4.png"
+          data-index="0"
+          alt="ونق"
+        >
+
+        <button class="arrow left" onclick="changeImage(this,1)">❮</button>
+      </div>
+
+      <div class="product-info">
+
+        <h3>ونق | Wanaq</h3>
+
+        <h4 class="desc-title">وصف التشيرت</h4>
+
+        <div class="desc">
+          اختار المصمم في هذا التصميم أن يكون رمز القوات الجوية السعودية في الصدر، تعبيرًا عن الاعتزاز بالأمن والأمان الذي تنعم به المملكة بفضل الله، في اليوم الوطني وفي كل يوم.
+          <br><br>
+          كما أضاف المصمم اسم المدينة التي ينتمي إليها العميل في الجهة اليمنى، إلى جانب صورة للبريد الجوي السعودي القديم، في لمسة تجمع بين الهوية الوطنية والتاريخ السعودي.
+          <br><br>
+          أما في الخلف، فتتزين خريطة المملكة العربية السعودية باللون الأخضر، وتحتها عبارة SAUDI ARABIA، لتكتمل هوية التصميم بطابع وطني عصري يعكس الفخر بالمملكة وتاريخها.
+          <br><br>
+          كما أضيفت لمسات مكملة للتصميم، مثل شعار زومولار التاريخي ورمز السيفين والنخلة، لإبراز الهوية السعودية والفخر بالإنتاج السعودي.
+        </div>
+
+        <div class="price">
+          <span class="old">130 <img src="riyalsymbol.png" class="sar-icon"></span>
+          <span class="new">96 <img src="riyalsymbol.png" class="sar-icon"></span>
+        </div>
+
+        <div class="sizes">
+          <button class="size">S</button>
+          <button class="size">M</button>
+          <button class="size">L</button>
+          <button class="size">XL</button>
+          <button class="size">XXL</button>
+          <button class="size">XXXL</button>
+        </div>
+
+        <button class="add" onclick="addToCart('ونق | Wanaq',96,this)">
+          أضف للسلة 🛒
+        </button>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- آراء العملاء -->
+<section class="section" id="reviews">
+
+  <div class="section-title">
+    <h2>آراء العملاء ⭐</h2>
+    <p>تجارب عملائنا مع ZUMOLAR.</p>
+  </div>
+
+  <div class="review-grid" id="reviewGrid">
+
+    <div class="review">
+      <div class="stars">★★★★★</div>
+      <p>التيشرت فخم والتفاصيل على الطبيعة أحلى بكثير، والمقاس جاء مضبوط.</p>
+      <strong>عبدالله</strong>
+      <div class="city">الرياض</div>
+    </div>
+
+    <div class="review">
+      <div class="stars">★★★★★</div>
+      <p>من أجمل التصاميم اللي شفتها، خصوصًا المجموعة السعودية.</p>
+      <strong>محمد</strong>
+      <div class="city">جدة</div>
+    </div>
+
+    <div class="review">
+      <div class="stars">★★★★☆</div>
+      <p>جودة ممتازة والتعامل سريع ومحترم، أكيد مو آخر طلب لي.</p>
+      <strong>سلمان</strong>
+      <div class="city">الدمام</div>
+    </div>
+
+  </div>
+
+  <form class="review-form" onsubmit="addReview(event)">
+
+    <h3>شاركنا رأيك ⭐</h3>
+
+    <div class="row">
+      <input id="reviewName" placeholder="اسمك" required>
+      <input id="reviewCity" placeholder="مدينتك" required>
+    </div>
+
+    <select id="reviewRating" required>
+      <option value="">اختر التقييم</option>
+      <option value="5">★★★★★ — 5</option>
+      <option value="4">★★★★☆ — 4</option>
+      <option value="3">★★★☆☆ — 3</option>
+      <option value="2">★★☆☆☆ — 2</option>
+      <option value="1">★☆☆☆☆ — 1</option>
+    </select>
+
+    <textarea id="reviewText" placeholder="اكتب رأيك هنا..." required></textarea>
+
+    <button class="review-submit">نشر رأيي ⭐</button>
+
+  </form>
+</section>
+
+<!-- تواصل معنا -->
+<section class="section contact" id="contact">
+
+  <div class="section-title">
+    <h2>تواصل معنا 📞</h2>
+    <p>حياك الله، تواصل معنا في أي وقت 🤍</p>
+  </div>
+
+  <div class="contact-box">
+
+    <div class="contact-card">
+
+      <div class="contact-icon phone-icon">
+        📞
+      </div>
+
+      <div>
+        <span>اتصل علينا</span>
+        <a href="tel:0502502069">
+          0502502069
+        </a>
+      </div>
+
+    </div>
+
+    <div class="contact-card">
+
+      <div class="contact-icon wa-icon">
+        💬
+      </div>
+
+      <div>
+        <span>واتساب</span>
+        <a href="https://wa.me/966502502069" target="_blank">
+          تواصل معنا
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- السلة -->
+<div class="cart" id="cart">
+
+  <h2>🛒 سلة المشتريات</h2>
+
+  <div id="cartItems">
+    السلة فاضية.
+  </div>
+
+  <div class="cart-total">
+    <span>المجموع:</span>
+    <span id="cartTotal">0</span>
+    <img src="riyalsymbol.png" class="sar-icon" alt="ريال">
+  </div>
+
+  <button class="whatsapp-order" onclick="sendOrderWhatsApp()">
+    💬 إتمام الطلب عبر الواتساب
+  </button>
+
+  <button class="close-cart" onclick="toggleCart()">
+    إغلاق
+  </button>
+
+</div>
+
+<footer>
+  <h2>ZUMOLAR</h2>
+  <p>لأن ستايلك يستاهل يكون مختلف 🔥</p>
+  <p>© ZUMOLAR</p>
+</footer>
+
+<script>
+function enterSite(){
+  document.getElementById("welcome").classList.add("hide");
+}
+
+window.addEventListener("load",()=>{
+  setTimeout(()=>{
+    document.getElementById("welcome").classList.add("hide");
+  },2500);
+});
+
+/* تغيير صور التشيرت */
+function changeImage(button,direction){
+
+  const box=button.parentElement;
+  const img=box.querySelector("img");
+
+  const images=img.dataset.images.split(",");
+
+  let index=Number(img.dataset.index)+direction;
+
+  if(index<0){
+    index=images.length-1;
+  }
+
+  if(index>=images.length){
+    index=0;
+  }
+
+  img.style.opacity="0";
+
+  setTimeout(()=>{
+    img.src=images[index];
+    img.dataset.index=index;
+    img.style.opacity="1";
+  },150);
+}
+
+/* اختيار المقاس */
+document.querySelectorAll(".size").forEach(btn=>{
+
+  btn.addEventListener("click",()=>{
+
+    btn.parentElement
+      .querySelectorAll(".size")
+      .forEach(x=>x.classList.remove("selected"));
+
+    btn.classList.add("selected");
+
+  });
+
+});
+
+/* السلة */
+let cart=JSON.parse(
+  localStorage.getItem("zumolarCart")||"[]"
+);
+
+function saveCart(){
+  localStorage.setItem(
+    "zumolarCart",
+    JSON.stringify(cart)
+  );
+}
+
+/* إضافة المنتج للسلة + حفظ صورته */
+function addToCart(name,price,button){
+
+  const product=button.closest(".product");
+
+  const image=product.querySelector(
+    ".product-image img"
+  ).src;
+
+  const selectedSize=product.querySelector(
+    ".size.selected"
+  );
+
+  const size=selectedSize
+    ? selectedSize.textContent
+    : "غير محدد";
+
+  const cartName=name+" | المقاس "+size;
+
+  const existing=cart.find(
+    item=>item.name===cartName
+  );
+
+  if(existing){
+
+    existing.qty++;
+    existing.image=image;
+
+  }else{
+
+    cart.push({
+      name:cartName,
+      price:Number(price),
+      qty:1,
+      image:image
+    });
+
+  }
+
+  saveCart();
+  updateCart();
+
+  document.getElementById("cart").classList.add("show");
+}
+
+/* عرض السلة */
+function updateCart(){
+
+  document.getElementById("cartCount").textContent=
+    cart.reduce(
+      (sum,item)=>sum+Number(item.qty),
+      0
+    );
+
+  const box=document.getElementById("cartItems");
+
+  if(!cart.length){
+
+    box.innerHTML="السلة فاضية.";
+
+    document.getElementById("cartTotal").textContent="0";
+
+    return;
+  }
+
+  let html="";
+  let total=0;
+
+  cart.forEach((item,index)=>{
+
+    const price=Number(item.price)||0;
+    const qty=Number(item.qty)||0;
+
+    const itemTotal=price*qty;
+
+    total+=itemTotal;
+
+    html+=`
+
+      <div class="cart-item">
+
+        <div class="cart-product">
+
+          <img
+            class="cart-product-img"
+            src="${item.image||"logo.png"}"
+            alt="${escapeHTML(item.name)}"
+          >
+
+          <div class="cart-product-info">
+
+            <div class="cart-item-top">
+              <span>
+                ${escapeHTML(item.name)}
+              </span>
+            </div>
+
+            <div>
+              الكمية: ${qty}
+            </div>
+
+            <div class="cart-item-price">
+              سعر القطعة:
+              ${price}
+              <img
+                src="riyalsymbol.png"
+                class="cart-sar"
+                alt="ريال"
+              >
+            </div>
+
+            <div class="cart-item-total">
+              إجمالي المنتج:
+              ${itemTotal}
+              <img
+                src="riyalsymbol.png"
+                class="cart-sar"
+                alt="ريال"
+              >
+            </div>
+
+          </div>
+
+        </div>
+
+        <button
+          class="remove"
+          onclick="removeFromCart(${index})"
+        >
+          حذف
+        </button>
+
+      </div>
+
+    `;
+  });
+
+  box.innerHTML=html;
+
+  document.getElementById("cartTotal").textContent=
+    total.toFixed(0);
+}
+
+function escapeHTML(text){
+
+  return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+function removeFromCart(index){
+
+  cart.splice(index,1);
+
+  saveCart();
+
+  updateCart();
+}
+
+function toggleCart(){
+
+  document
+    .getElementById("cart")
+    .classList
+    .toggle("show");
+}
+
+/* إرسال السلة كاملة للواتساب */
+function sendOrderWhatsApp(){
+
+  if(!cart.length){
+
+    alert("السلة فاضية، أضف منتج أولاً.");
+
+    return;
+  }
+
+  let message=
+    "السلام عليكم، أبغى أطلب من ZUMOLAR 👋\n\n";
+
+  let total=0;
+
+  cart.forEach(item=>{
+
+    const price=Number(item.price)||0;
+    const qty=Number(item.qty)||0;
+
+    const itemTotal=price*qty;
+
+    total+=itemTotal;
+
+    message+=
+      "👕 "+item.name+
+      "\nالكمية: "+qty+
+      "\nسعر القطعة: "+price+" ريال"+
+      "\nإجمالي المنتج: "+itemTotal+" ريال\n\n";
+
+  });
+
+  message+=
+    "💰 المجموع: "+total+" ريال\n\n"+
+    "أتمنى تأكيد الطلب، وشكرًا ❤️";
+
+  window.open(
+    "https://wa.me/966502502069?text="+
+    encodeURIComponent(message),
+    "_blank"
+  );
+}
+
+/* الفلاتر */
+const filters={
+  zumolar:"all",
+  saudi:"all"
+};
+
+function setFilter(section,type,button){
+
+  filters[section]=type;
+
+  button.parentElement
+    .querySelectorAll(".filter")
+    .forEach(x=>x.classList.remove("active"));
+
+  button.classList.add("active");
+
+  filterProducts(section);
+}
+
+function filterProducts(section){
+
+  const search=document.getElementById(
+    section==="zumolar"
+      ?"zumolarSearch"
+      :"saudiSearch"
+  ).value.toLowerCase().trim();
+
+  const grid=document.getElementById(
+    section==="zumolar"
+      ?"zumolarGrid"
+      :"saudiGrid"
+  );
+
+  grid.querySelectorAll(".product").forEach(product=>{
+
+    const matchSearch=
+      product.dataset.name
+        .toLowerCase()
+        .includes(search);
+
+    const stock=product.dataset.stock;
+
+    const matchStock=
+      filters[section]==="all" ||
+      (
+        filters[section]==="available" &&
+        stock==="available"
+      ) ||
+      (
+        filters[section]==="out" &&
+        stock==="out"
+      );
+
+    product.classList.toggle(
+      "hide",
+      !(matchSearch&&matchStock)
+    );
+
+  });
+}
+
+/* أبلغني */
+function toggleNotify(button){
+
+  const form=button.nextElementSibling;
+
+  form.classList.toggle("show");
+
+  button.textContent=
+    form.classList.contains("show")
+      ?"إخفاء النموذج"
+      :"🔔 أبلغني عند وجود كمية";
+}
+
+function saveNotify(button,product){
+
+  const form=button.parentElement;
+
+  const name=
+    form.querySelector(".notify-name")
+      .value.trim();
+
+  const phone=
+    form.querySelector(".notify-phone")
+      .value.trim();
+
+  const email=
+    form.querySelector(".notify-email")
+      .value.trim();
+
+  if(!name){
+
+    alert("اكتب اسمك أولاً");
+
+    return;
+  }
+
+  if(!phone){
+
+    alert("اكتب رقم الجوال أولاً");
+
+    return;
+  }
+
+  const notifications=
+    JSON.parse(
+      localStorage.getItem(
+        "zumolarNotifications"
+      )||"[]"
+    );
+
+  notifications.push({
+    product,
+    name,
+    phone,
+    email,
+    date:new Date().toISOString()
+  });
+
+  localStorage.setItem(
+    "zumolarNotifications",
+    JSON.stringify(notifications)
+  );
+
+  form.innerHTML=`
+
+    <div class="success">
+      ✅ تم تسجيل طلبك بنجاح.
+      <br>
+      بنبلغك عند توفر ${escapeHTML(product)}
+    </div>
+
+  `;
+}
+
+/* آراء العملاء */
+function addReview(event){
+
+  event.preventDefault();
+
+  const review={
+
+    name:
+      document
+      .getElementById("reviewName")
+      .value.trim(),
+
+    city:
+      document
+      .getElementById("reviewCity")
+      .value.trim(),
+
+    rating:
+      Number(
+        document
+        .getElementById("reviewRating")
+        .value
+      ),
+
+    text:
+      document
+      .getElementById("reviewText")
+      .value.trim()
+
+  };
+
+  const reviews=
+    JSON.parse(
+      localStorage.getItem(
+        "zumolarReviews"
+      )||"[]"
+    );
+
+  reviews.push(review);
+
+  localStorage.setItem(
+    "zumolarReviews",
+    JSON.stringify(reviews)
+  );
+
+  showReview(review);
+
+  event.target.reset();
+
+  alert("تم حفظ رأيك بنجاح ⭐");
+}
+
+function showReview(review){
+
+  const card=document.createElement("div");
+
+  card.className="review";
+
+  const stars=
+    "★★★★★".slice(0,review.rating)+
+    "☆☆☆☆☆".slice(0,5-review.rating);
+
+  card.innerHTML=`
+
+    <div class="stars">
+      ${stars}
+    </div>
+
+    <p></p>
+
+    <strong></strong>
+
+    <div class="city"></div>
+
+  `;
+
+  card.querySelector("p").textContent=
+    review.text;
+
+  card.querySelector("strong").textContent=
+    review.name;
+
+  card.querySelector(".city").textContent=
+    review.city;
+
+  document
+    .getElementById("reviewGrid")
+    .appendChild(card);
+}
+
+function loadReviews(){
+
+  const reviews=
+    JSON.parse(
+      localStorage.getItem(
+        "zumolarReviews"
+      )||"[]"
+    );
+
+  reviews.forEach(showReview);
+}
+
+/* تشغيل السلة والآراء */
+updateCart();
+loadReviews();
+</script>
+
+</body>
+</html>
